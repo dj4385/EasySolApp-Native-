@@ -1,0 +1,22 @@
+.back-image{
+    --background: url(../../assets/bgimg.png) 0 0/100% 100% no-repeat;
+}
+.cardBg{
+    background: #2d3436;
+    color: white;
+    padding: 5px;
+    margin-left: 5px;
+}
+.spinPos{
+    position: relative;
+    top: 50%;
+    left: 50%;
+}
+.sc-ion-card-md-h{
+    margin: 0 !important
+}
+.img{
+    border-radius: 50%;
+    height: 120px;
+    width: 120px
+}

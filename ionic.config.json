@@ -1,0 +1,7 @@
+{
+  "name": "EasySol-App",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS userLogin(id INTEGER PRIMARY KEY AUTOINCREMENT,userType varchar(4),userID varchar(10),password varchar(10),name varchar(max));
