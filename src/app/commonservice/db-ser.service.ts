@@ -24,14 +24,20 @@ export class DbSerService {
       // this.createDataBase()
    }
 
-   createDataBase(){
+   createDataBase(_userType,_userID,_pass, _name){
      this.plt.ready().then(()=>{
        this.sqlite.create({
          name: 'EasySolApp.db',
          location: 'default'
        }).then((db: SQLiteObject)=>{
-        db.executeSql('create table danceMoves(name VARCHAR(32))', [])
+        db.executeSql('CREATE TABLE IF NOT EXISTS userLogin(id INTEGER PRIMARY KEY AUTOINCREMENT,userType varchar(4),userID varchar(10),password varchar(10),name varchar(max))', [])
         .then(() => console.log('Executed SQL'))
+        .then(()=>{
+          let data = [_userType, _userID, _pass, _name];
+          return this.database.executeSql('INSERT INTO userLogin (userType,userID,password,name) VALUES (?, ?, ?, ?)', data).then(data => {
+          console.log(data)
+          });   
+        })
         .catch(e => console.log(e));
           // console.log("Value of db",db)
           // this.database = db,

@@ -48,7 +48,7 @@ export class HomePage {
             if(this.supplierResponse.LoginResult.SuppName != ""){
               localStorage.setItem('lSupp',this.supplier.userId);
               localStorage.setItem('SuppName',this.supplierResponse.LoginResult.SuppName)
-              // this._addToDB.addLoginUsers("SL",this.supplier.userId,this.supplier.password,this.supplierResponse.LoginResult.SuppName)
+              this._addToDB.createDataBase("SL",this.supplier.userId,this.supplier.password,this.supplierResponse.LoginResult.SuppName)
               this._router.navigate(['/sales-man-login'])
               this.reset()
             } else {
