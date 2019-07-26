@@ -28,6 +28,7 @@ export class HomePagePage implements OnInit {
   itemObj : any = {}
   customerObj : any = {}
 
+
   constructor(
     private _route: Router,
     private _saleService : SalesSerService,
@@ -115,3 +116,4 @@ export class HomePagePage implements OnInit {
     this._route.navigate(['/customer'])
   }
 }
+// ritikagarg10

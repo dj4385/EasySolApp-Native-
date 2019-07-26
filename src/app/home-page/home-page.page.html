@@ -51,6 +51,7 @@
     <ion-row>
       <ion-col size="6" *ngIf="items.length > 0">
         <ion-card color="primary" (click)="viewItems()">
+            <!-- [routerLink]="[ '/item-page', items ]" -->
           <ion-card-content>
             <div style="text-align: center" >
               <img src="../../assets/medProduct.png" style="border-radius: 50%">

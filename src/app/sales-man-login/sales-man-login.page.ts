@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertSerService } from '../commonservice/alert-ser.service';
 import { SalesSerService } from '../commonservice/sales-ser.service';
 import { MenuController } from '@ionic/angular';
+import { DbSerService } from '../commonservice/db-ser.service';
 
 @Component({
   selector: 'app-sales-man-login',
@@ -25,7 +26,8 @@ export class SalesManLoginPage implements OnInit {
     private _router : Router,
     private _alertService : AlertSerService,
     private _saleSer: SalesSerService,
-    private _menuCtrl : MenuController
+    private _menuCtrl : MenuController,
+    private _addToDB : DbSerService
   ) { }
 
   ngOnInit() {
@@ -47,6 +49,7 @@ export class SalesManLoginPage implements OnInit {
             this.salesManLoginResponse = res;
             if(this.salesManLoginResponse.SuppLoginResult != ""){
               localStorage.setItem('SalesManName',this.salesManLoginResponse.SuppLoginResult)
+              this._addToDB.createDataBase("SM",this.salesMan.UserId,this.salesMan.Password,this.salesManLoginResponse.SuppLoginResult)
               this.reset()
               this._router.navigate(['/home-page'])
             } else {

@@ -9,6 +9,8 @@ import { MenuController } from '@ionic/angular';
 })
 export class ItemPagePage implements OnInit {
 
+  _items : any = []
+
   constructor(
     private _route : Router,
     private _menuCtrl : MenuController
@@ -20,6 +22,7 @@ export class ItemPagePage implements OnInit {
   ionViewWillEnter() {
     this._menuCtrl.enable(false);
   }
+
 
   logout(){
     localStorage.removeItem('SalesManName');
