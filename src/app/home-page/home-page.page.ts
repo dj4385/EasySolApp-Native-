@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SalesSerService } from '../commonservice/sales-ser.service';
 import { AlertSerService } from '../commonservice/alert-ser.service';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class HomePagePage implements OnInit {
   constructor(
     private _route: Router,
     private _saleService : SalesSerService,
-    private _alertService : AlertSerService
+    private _alertService : AlertSerService,
+    private loadingController : LoadingController
   ) { }
 
   ngOnInit() {
@@ -50,6 +52,14 @@ export class HomePagePage implements OnInit {
     this._route.navigate(['/sales-man-login']);
   }
 
+  async syncInProgress(){
+    const loading = await this.loadingController.create({
+      message: 'Syn Start',
+      animated: true,
+    });
+    await loading.present();
+  }
+
   startSync(){
     let selectedOption : any = {}
     this.checkBoxVal.filter(ele=>{
@@ -57,17 +67,17 @@ export class HomePagePage implements OnInit {
         selectedOption = ele
         if(selectedOption.val == "Items"){
           this.getItems()
+          this.syncInProgress()
           console.log("getItems")
           
           ele.isChecked = false
         } else if(selectedOption.val == "Customers"){
           this.getCustomers()
+          this.syncInProgress()
           console.log("getCusomters")
           
           ele.isChecked = false
         }
-      } else {
-        this._alertService.emptyTextFieldMsg("Please select atleast one option to start sync process");
       } 
     })
   }
@@ -81,8 +91,9 @@ export class HomePagePage implements OnInit {
           // this.items.forEach(item => {
           //   console.log(item.Name)
           // })
-          this._alertService.setSupplierSuccessMsg("Items sync successfully.")
-                    
+          this.loadingController.dismiss().then(()=>{
+            this._alertService.setSupplierSuccessMsg("Items sync successfully.")
+          })
         },
         err=>{
           this._alertService.setSupplierErrorMsg(err.message)
@@ -99,7 +110,10 @@ export class HomePagePage implements OnInit {
           // this.customers.forEach(customer => {
           //   console.log(customer.Name)
           // })
-          this._alertService.setSupplierSuccessMsg("Customers sync successfully.")
+          this.loadingController.dismiss().then(()=>{
+            this._alertService.setSupplierSuccessMsg("Customers sync successfully.")
+          })
+          
           
         },
         err=>{

@@ -23,4 +23,9 @@ android studio
 then to create build type the following command :
     ionic cordova prepare android
 then go to android studio and build the apk file.
+
+
+Ignoring invalid SSL certificates on Cordova for Android and iOS follow this link : http://ivancevich.me/articles/ignoring-invalid-ssl-certificates-on-cordova-android-ios/
+
+
     
