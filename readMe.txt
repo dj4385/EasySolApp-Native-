@@ -30,4 +30,4 @@ then go to android studio and build the apk file.
 Ignoring invalid SSL certificates on Cordova for Android and iOS follow this link : http://ivancevich.me/articles/ignoring-invalid-ssl-certificates-on-cordova-android-ios/
 
 
-    
+To add splace screen and icon of app :- https://www.youtube.com/watch?v=QyKNZnR9-3Y
