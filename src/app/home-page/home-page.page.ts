@@ -61,6 +61,7 @@ export class HomePagePage implements OnInit {
   }
 
   startSync(){
+    let uncheckedBoxArray = []
     let selectedOption : any = {}
     this.checkBoxVal.filter(ele=>{
       if(ele.isChecked == true){
@@ -78,7 +79,14 @@ export class HomePagePage implements OnInit {
           
           ele.isChecked = false
         }
-      } 
+      } else if(ele.isChecked == false){
+        
+        uncheckedBoxArray.push(ele)
+        if(uncheckedBoxArray.length > 1){
+          this._alertService.setSupplierSuccessMsg("Please Select an option")
+          uncheckedBoxArray = []
+        }
+      }
     })
   }
 
