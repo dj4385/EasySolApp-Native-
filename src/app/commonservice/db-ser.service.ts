@@ -30,63 +30,63 @@ export class DbSerService {
          name: 'EasySolApp.db',
          location: 'default'
        }).then((db: SQLiteObject)=>{
-        db.executeSql('CREATE TABLE IF NOT EXISTS userLogin(id INTEGER PRIMARY KEY AUTOINCREMENT,userType varchar(4),userID varchar(10),password varchar(10),name varchar(max))', [])
-        .then(() => console.log('Executed SQL'))
-        .then(()=>{
-          let data = [_userType, _userID, _pass, _name];
-          return this.database.executeSql('INSERT INTO userLogin (userType,userID,password,name) VALUES (?, ?, ?, ?)', data).then(data => {
-          console.log(data)
-          });   
-        })
-        .catch(e => console.log(e));
-          // console.log("Value of db",db)
-          // this.database = db,
-          // console.log("value of data:",this.database)
-          // this.getSqlFile()
+        // db.executeSql('CREATE TABLE IF NOT EXISTS userLogin(id INTEGER PRIMARY KEY AUTOINCREMENT,userType varchar(4),userID varchar(10),password varchar(10),name varchar(max))', [])
+        // .then(() => console.log('Executed SQL'))
+        // .then(()=>{
+        //   let data = [_userType, _userID, _pass, _name];
+        //   return this.database.executeSql('INSERT INTO userLogin (userType,userID,password,name) VALUES (?, ?, ?, ?)', data).then(data => {
+        //   console.log(data)
+        //   });   
+        // })
+        // .catch(e => console.log(e));
+          console.log("Value of db",db)
+          this.database = db,
+          console.log("value of data:",this.database)
+          this.getSqlFile()
        }).catch(e => console.log(e));
      })
    }
 
-  //  getSqlFile(){
-  //   this.http.get('assets/Db/SQLQuery.sql', { responseType: 'text'})
-  //   .subscribe(sql => {
-  //     this.sqlitePorter.importSqlToDb(this.database, sql)
-  //       .then(_ => {
-  //         this.loadUsers()
-  //         this.dbReady.next(true);
-  //       })
-  //       .catch(e => console.error(e));
-  //   });
-  //  }
+   getSqlFile(){
+    this.http.get('assets/Db/SQLQuery.sql', { responseType: 'text'})
+    .subscribe(sql => {
+      this.sqlitePorter.importSqlToDb(this.database, sql)
+        .then(_ => {
+          this.loadUsers()
+          this.dbReady.next(true);
+        })
+        .catch(e => console.error(e));
+    });
+   }
 
-  //  loadUsers() {
-  //   return this.database.executeSql('SELECT * FROM userLogin', []).then(data => {
-  //     let developers: any = [];
+   loadUsers() {
+    return this.database.executeSql('SELECT * FROM userLogin', []).then(data => {
+      let developers: any = [];
  
-  //     if (data.rows.length > 0) {
-  //       for (var i = 0; i < data.rows.length; i++) {
-  //         let skills = [];
-  //         if (data.rows.item(i).skills != '') {
-  //           skills = JSON.parse(data.rows.item(i).skills);
-  //         }
+      if (data.rows.length > 0) {
+        for (var i = 0; i < data.rows.length; i++) {
+          let skills = [];
+          if (data.rows.item(i).skills != '') {
+            skills = JSON.parse(data.rows.item(i).skills);
+          }
  
-  //         developers.push({ 
-  //           id: data.rows.item(i).id,
-  //           name: data.rows.item(i).name, 
-  //           skills: skills, 
-  //           img: data.rows.item(i).img
-  //          });
-  //       }
-  //     }
-  //     this.UserLogin.next(developers);
-  //   });
-  // }
+          developers.push({ 
+            id: data.rows.item(i).id,
+            name: data.rows.item(i).name, 
+            skills: skills, 
+            img: data.rows.item(i).img
+           });
+        }
+      }
+      this.UserLogin.next(developers);
+    });
+  }
 
-  // addLoginUsers(_userType, _userID, _pass, _name) {
-  //   let data = [_userType, _userID, _pass, _name];
-  //   return this.database.executeSql('INSERT INTO userLogin (userType,userID,password,name) VALUES (?, ?, ?, ?)', data).then(data => {
-  //     this.loadUsers();
-  //     console.log(data)
-  //   });
-  // }
+  addLoginUsers(_userType, _userID, _pass, _name) {
+    let data = [_userType, _userID, _pass, _name];
+    return this.database.executeSql('INSERT INTO userLogin (userType,userID,password,name) VALUES (?, ?, ?, ?)', data).then(data => {
+      this.loadUsers();
+      console.log(data)
+    });
+  }
 }

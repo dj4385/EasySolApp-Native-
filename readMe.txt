@@ -22,6 +22,8 @@ android studio
 
 then to create build type the following command :
     ionic cordova prepare android
+
+    to create the build of the production : -ionic cordova build android --prod
 then go to android studio and build the apk file.
 
 
